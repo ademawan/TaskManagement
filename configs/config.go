@@ -10,14 +10,14 @@ import (
 )
 
 type AppConfig struct {
-	Port     int `yaml:"port"`
+	Port     int
 	Database struct {
-		Driver   string `yaml:"driver"`
-		Name     string `yaml:"name"`
-		Address  string `yaml:"address"`
-		Port     int    `yaml:"port"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
+		Driver   string
+		Name     string
+		Address  string
+		Port     int
+		Username string
+		Password string
 	}
 }
 
@@ -41,8 +41,11 @@ func initConfig() *AppConfig {
 	if err != nil {
 		log.Info(err)
 	}
+	port, errParse := strconv.Atoi(os.Getenv("DB_PORT"))
+	if errParse != nil {
+		log.Warn(errParse)
+	}
 
-	port, _ := strconv.Atoi(os.Getenv("DB_PORT"))
 	var defaultConfig AppConfig
 	defaultConfig.Port = 8000
 	defaultConfig.Database.Driver = os.Getenv("DB_DRIVER")
