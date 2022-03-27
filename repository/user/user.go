@@ -19,7 +19,7 @@ func New(db *gorm.DB) *UserRepository {
 func (ur *UserRepository) Get() ([]entities.User, error) {
 	arrUser := []entities.User{}
 
-	if err := ur.database.Find(&arrUser).Error; err != nil {
+	if err := ur.database.Debug().Preload("Task").Find(&arrUser).Error; err != nil {
 		return nil, err
 	}
 
@@ -31,7 +31,7 @@ func (ur *UserRepository) GetById(userId int) (entities.User, error) {
 	// var artikel models.Artikel
 
 	// Conn.Preload("Komentar").Find(&artikle)
-	result := ur.database.Preload("Task").Where("ID = ?", userId).First(&arrUser)
+	result := ur.database.Debug().Preload("Task").Where("ID = ?", userId).First(&arrUser)
 	// if err := ur.database.Preload("Task").Find(&arrUser, userId).Error; err != nil {
 
 	if err := result.Error; err != nil {

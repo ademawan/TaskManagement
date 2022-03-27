@@ -2,10 +2,8 @@ package utils
 
 import (
 	"Project-REST-API/configs"
-	"Project-REST-API/entities"
 	"fmt"
 
-	faker "github.com/bxcodec/faker/v3"
 	"github.com/labstack/gommon/log"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -34,17 +32,29 @@ func InitDB(config *configs.AppConfig) *gorm.DB {
 }
 
 func InitMigrate(db *gorm.DB) {
-	db.Migrator().DropTable(&entities.Task{})
-	db.Migrator().DropTable(&entities.Project{})
-	db.Migrator().DropTable(&entities.User{})
-	db.AutoMigrate(&entities.User{})
-	db.AutoMigrate(&entities.Task{})
-	db.AutoMigrate(&entities.Project{})
-	for i := 0; i < 2000; i++ {
-		db.Create(&entities.User{
-			Nama:     faker.Name(),
-			Email:    faker.Email(),
-			Password: "xyz",
-		})
-	}
+	// db.Migrator().DropTable(&entities.Task{})
+	// db.Migrator().DropTable(&entities.Project{})
+	// // db.Migrator().DropTable(&entities.User{})
+	// // db.AutoMigrate(&entities.User{})
+	// db.AutoMigrate(&entities.Project{})
+	// db.AutoMigrate(&entities.Task{})
+	// // for i := 0; i < 2000; i++ {
+	// // 	db.Create(&entities.User{
+	// // 		Nama:     faker.Name(),
+	// // 		Email:    faker.Email(),
+	// // 		Password: "xyz",
+	// // 	})
+	// // }
+	// for i := 0; i < 500; i++ {
+	// 	db.Create(&entities.Project{
+	// 		Nama: faker.TitleMale(),
+	// 	})
+	// }
+	// for i := 0; i < 500; i++ {
+	// 	db.Create(&entities.Task{
+	// 		Nama:       faker.TitleMale(),
+	// 		User_ID:    int(math.Round(float64(rand.Intn(20)))),
+	// 		Project_ID: int(math.Round(float64(rand.Intn(100)))),
+	// 	})
+	// }
 }
