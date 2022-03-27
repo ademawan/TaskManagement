@@ -6,7 +6,7 @@ import (
 
 type User struct {
 	gorm.Model
-	Nama     string
+	Nama     string `gorm:"index"`
 	Email    string
 	Password string
 
